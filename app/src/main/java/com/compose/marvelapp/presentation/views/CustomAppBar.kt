@@ -18,7 +18,7 @@ fun CustomAppBar(
     title: String,
     onBackClicked: (() -> Unit)? = null,
 ) {
-    Surface(shadowElevation = 10.dp) {
+    Surface(shadowElevation = 2.dp) {
         TopAppBar(
             title = { Text(text = title) },
             navigationIcon = {

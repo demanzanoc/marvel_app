@@ -54,6 +54,7 @@ android {
 dependencies {
     val navVersion = "2.7.7"
     val hiltVersion = "2.51"
+    val coilVersion = "2.6.0"
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
@@ -78,6 +79,9 @@ dependencies {
     //Navigation
     implementation ("androidx.navigation:navigation-compose:$navVersion")
 
+    //Coil
+    implementation("io.coil-kt:coil-compose:$coilVersion")
+    implementation("io.coil-kt:coil-gif:$coilVersion")
 }
 
 kapt {

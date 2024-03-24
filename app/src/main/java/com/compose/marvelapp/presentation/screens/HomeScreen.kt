@@ -1,6 +1,5 @@
 package com.compose.marvelapp.presentation.screens
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -34,7 +33,6 @@ fun HomeScreen(navController: NavHostController) {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
-                .clickable { navController.navigate(route = AppRoutes.SUPERHERO_COMICS) }
         ) {
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
@@ -44,7 +42,11 @@ fun HomeScreen(navController: NavHostController) {
             ) {
                 items(superheroList.size) { index ->
                     Column {
-                        NetworkGifImage(superheroList[index].urlGifImage)
+                        NetworkGifImage(superheroList[index].urlGifImage) {
+                            navController.navigate(
+                                route = "${AppRoutes.SUPERHERO_COMICS}/${superheroList[index].name}"
+                            )
+                        }
                         Text(
                             text = superheroList[index].name,
                             modifier = Modifier.padding(horizontal = 8.dp)

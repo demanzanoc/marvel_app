@@ -1,6 +1,7 @@
 package com.compose.marvelapp.presentation.views
 
 import android.os.Build
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -24,7 +25,7 @@ import com.compose.marvelapp.presentation.theme.MarvelAppTheme
 
 
 @Composable
-fun NetworkGifImage(urlGifImage: String) {
+fun NetworkGifImage(urlGifImage: String, onClick: () -> Unit) {
     Box(
         modifier = Modifier
             .padding(6.dp)
@@ -40,7 +41,8 @@ fun NetworkGifImage(urlGifImage: String) {
                 loading = { CenterCircularProgressBar() },
                 modifier = Modifier
                     .clip(RoundedCornerShape(6.dp))
-                    .fillMaxSize(),
+                    .fillMaxSize()
+                    .clickable { onClick() },
                 contentScale = ContentScale.Crop,
             )
         }
@@ -64,6 +66,6 @@ fun getDecoderFactory() =
 @Composable
 fun NetworkGifImagePreview() {
     MarvelAppTheme {
-        NetworkGifImage("")
+        NetworkGifImage("") {}
     }
 }

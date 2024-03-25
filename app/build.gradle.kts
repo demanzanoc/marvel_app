@@ -55,6 +55,9 @@ dependencies {
     val navVersion = "2.7.7"
     val hiltVersion = "2.51"
     val coilVersion = "2.6.0"
+    val retrofitVersion = "2.9.0"
+    val viewModelLifecycleVersion = "2.7.0"
+    val hiltNavVersion = "1.2.0"
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
@@ -75,6 +78,14 @@ dependencies {
     //Dagger Hilt
     implementation("com.google.dagger:hilt-android:$hiltVersion")
     kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
+    implementation ("androidx.hilt:hilt-navigation-compose:$hiltNavVersion")
+
+    //Retrofit
+    implementation ("com.squareup.retrofit2:retrofit:$retrofitVersion")
+    implementation ("com.squareup.retrofit2:converter-gson:$retrofitVersion")
+
+    // ViewModel
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:$viewModelLifecycleVersion")
 
     //Navigation
     implementation ("androidx.navigation:navigation-compose:$navVersion")

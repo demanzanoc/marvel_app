@@ -1,4 +1,4 @@
-package com.compose.marvelapp.domain.superhero
+package com.compose.marvelapp.domain.entities.superhero
 
 object SuperheroList {
     val superheroes = listOf(

@@ -7,8 +7,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.compose.marvelapp.presentation.navigation.AppNavigator
 import com.compose.marvelapp.presentation.theme.MarvelAppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
-class HomeActivity : ComponentActivity() {
+@AndroidEntryPoint
+class MainActivity : ComponentActivity() {
 
     private lateinit var navController: NavHostController
 

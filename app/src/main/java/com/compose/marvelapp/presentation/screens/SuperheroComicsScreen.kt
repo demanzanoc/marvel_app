@@ -7,7 +7,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.compose.marvelapp.presentation.theme.MarvelAppTheme
 import com.compose.marvelapp.presentation.views.CustomAppBar
 
 @Composable
@@ -22,5 +25,13 @@ fun SuperheroComicsScreen(navController: NavHostController, superheroName: Strin
         ) {
             Text(text = superheroName)
         }
+    }
+}
+
+@Preview
+@Composable
+fun SuperheroComicsScreenPreview() {
+    MarvelAppTheme {
+        SuperheroComicsScreen(navController = rememberNavController(), superheroName = "Iron Man")
     }
 }

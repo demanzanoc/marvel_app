@@ -1,30 +1,53 @@
 package com.compose.marvelapp.data.repositories.comics
 
 import com.compose.marvelapp.data.api.comics.retrofit.RetrofitComicsClient
-import com.compose.marvelapp.data.models.comics.SuperheroDataResponse
+import com.compose.marvelapp.data.api.common.toSecureUri
+import com.compose.marvelapp.data.models.comics.ComicItemResourceResponse
+import com.compose.marvelapp.data.repositories.common.BaseRepository
 import com.compose.marvelapp.domain.repositories.comics.ComicsRepository
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class ComicsRepositoryImpl : ComicsRepository {
+class ComicsRepositoryImpl @Inject constructor(
+    private val client: RetrofitComicsClient,
+    private val dispatcher: CoroutineDispatcher,
+) : ComicsRepository, BaseRepository() {
 
-    private val retrofit = Retrofit.Builder()
-        .baseUrl("https://gateway.marvel.com/v1/")
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-
-    private val client = retrofit.create(RetrofitComicsClient::class.java)
-
-    override suspend fun getComicsBySuperhero(superheroName: String): SuperheroDataResponse {
-        try {
-            val response = client.getComicsBySuperhero(superheroName)
-            if (response.isSuccessful) {
-                return response.body() ?: throw Exception("Response body is null")
-            } else {
-                throw Exception("Error: ${response.code()}")
+    override suspend fun getComicsBySuperhero(superheroName: String) {
+        withContext(dispatcher) {
+            handleApiResponse {
+                val response = client.getComicsBySuperhero(superheroName)
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        getComicsData(
+                            it.data.results[0].comicsResourcesResponse.itemsResourcesResponse
+                        )
+                    }
+                } else {
+                    throw Exception("Error: ${response.code()}")
+                }
             }
-        } catch (e: Exception) {
-            throw Exception("Error: ${e.message}")
+        }
+    }
+
+    private suspend fun getComicsData(itemsResourcesResponse: List<ComicItemResourceResponse>?) {
+        withContext(dispatcher) {
+            itemsResourcesResponse?.map { resource ->
+                resource.resourceUri?.let { resourceUri ->
+                    val response = client.getComicsImages(resourceUri.toSecureUri())
+                    if (response.isSuccessful) {
+                        response.body()?.let {
+                            val image = it.data.results[0].images
+                            if (!image.isNullOrEmpty()) {
+                                println(it.data.results[0].images)
+                            }
+                        }
+                    } else {
+                        throw Exception("Error: ${response.code()}")
+                    }
+                }
+            }
         }
     }
 

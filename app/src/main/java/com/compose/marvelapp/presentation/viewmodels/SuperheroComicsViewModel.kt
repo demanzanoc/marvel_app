@@ -10,13 +10,16 @@ import javax.inject.Inject
 @HiltViewModel
 class SuperheroComicsViewModel @Inject constructor(
     private val getComicsUseCase: GetComicsBySuperheroUseCase,
-): ViewModel() {
+) : ViewModel() {
 
     fun getComics(superheroName: String) {
-     viewModelScope.launch {
-         val result = getComicsUseCase(superheroName)
-         println(result.dataResponse.comicsList[0].comicsResourcesResponse.itemsResourcesResponse[0].resourceUri)
-     }
+        viewModelScope.launch {
+            try {
+                getComicsUseCase(superheroName)
+            } catch (exception: Exception) {
+                getComicsUseCase(superheroName)
+            }
+        }
     }
 
 }

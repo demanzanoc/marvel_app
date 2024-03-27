@@ -15,19 +15,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.compose.marvelapp.domain.entities.superhero.SuperheroList
 import com.compose.marvelapp.presentation.navigation.AppRoutes
 import com.compose.marvelapp.presentation.theme.MarvelAppTheme
-import com.compose.marvelapp.presentation.viewmodels.SuperheroComicsViewModel
 import com.compose.marvelapp.presentation.views.CustomAppBar
 import com.compose.marvelapp.presentation.views.NetworkGifImage
 
 @Composable
 fun HomeScreen(navController: NavHostController) {
-    val viewModel: SuperheroComicsViewModel = hiltViewModel()
     val superheroList = SuperheroList.superheroes
     Scaffold(
         topBar = { CustomAppBar(title = "Marvel App") { navController.popBackStack() } },
@@ -47,7 +44,6 @@ fun HomeScreen(navController: NavHostController) {
                     val superhero = superheroList[index]
                     Column {
                         NetworkGifImage(superhero.urlGifImage) {
-                            viewModel.getComics(superhero.name)
                             navController.navigate(
                                 route = "${AppRoutes.SUPERHERO_COMICS}/${superhero.name}"
                             )

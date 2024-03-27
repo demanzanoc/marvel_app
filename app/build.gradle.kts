@@ -58,6 +58,7 @@ dependencies {
     val retrofitVersion = "2.9.0"
     val viewModelLifecycleVersion = "2.7.0"
     val hiltNavVersion = "1.2.0"
+    val okHttpVersion = "4.12.0"
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
@@ -74,6 +75,9 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    //Livedata
+    implementation ("androidx.compose.runtime:runtime-livedata")
 
     //Dagger Hilt
     implementation("com.google.dagger:hilt-android:$hiltVersion")

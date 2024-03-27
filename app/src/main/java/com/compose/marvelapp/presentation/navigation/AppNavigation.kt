@@ -1,6 +1,7 @@
 package com.compose.marvelapp.presentation.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -10,9 +11,11 @@ import com.compose.marvelapp.presentation.screens.ComicDetailScreen
 import com.compose.marvelapp.presentation.screens.HomeScreen
 import com.compose.marvelapp.presentation.screens.StartingScreen
 import com.compose.marvelapp.presentation.screens.SuperheroComicsScreen
+import com.compose.marvelapp.presentation.viewmodels.SuperheroComicsViewModel
 
 @Composable
 fun AppNavigator(navController: NavHostController) {
+    val viewModel: SuperheroComicsViewModel = hiltViewModel()
     NavHost(navController = navController, startDestination = AppRoutes.STARTING) {
         composable(AppRoutes.STARTING) { StartingScreen(navController) }
         composable(AppRoutes.HOME) { HomeScreen(navController) }
@@ -24,10 +27,21 @@ fun AppNavigator(navController: NavHostController) {
         ) { backStackEntry ->
             SuperheroComicsScreen(
                 navController = navController,
+                viewModel = viewModel,
                 superheroName = backStackEntry.arguments?.getString(NavArguments.SUPERHERO_NAME)
                     ?: ""
             )
         }
-        composable(AppRoutes.COMIC_DETAILS) { ComicDetailScreen(navController) }
+        composable(
+            route = "${AppRoutes.COMIC_DETAILS}/{${NavArguments.COMIC_ID}}",
+            arguments = listOf(
+                navArgument(NavArguments.COMIC_ID) { type = NavType.IntType }
+            )
+        ) { backStackEntry ->
+            ComicDetailScreen(
+                viewModel = viewModel,
+                comicId = backStackEntry.arguments?.getInt(NavArguments.COMIC_ID) ?: 0
+            )
+        }
     }
 }

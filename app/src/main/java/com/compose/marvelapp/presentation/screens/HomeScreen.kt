@@ -11,10 +11,11 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.compose.marvelapp.domain.entities.superhero.SuperheroList
@@ -34,25 +35,33 @@ fun HomeScreen(navController: NavHostController) {
                 .fillMaxSize()
                 .padding(padding)
         ) {
-            LazyVerticalGrid(
-                columns = GridCells.Fixed(2),
-                modifier = Modifier
-                    .align(Alignment.Center)
-                    .padding(10.dp)
-            ) {
-                items(superheroList.size) { index ->
-                    val superhero = superheroList[index]
-                    Column {
-                        NetworkGifImage(superhero.urlGifImage) {
-                            navController.navigate(
-                                route = "${AppRoutes.SUPERHERO_COMICS}/${superhero.name}"
+            Column {
+                Text(
+                    text = "Select your favorite superhero",
+                    modifier = Modifier
+                        .padding(vertical = 10.dp, horizontal = 12.dp),
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                )
+                LazyVerticalGrid(
+                    columns = GridCells.Fixed(2),
+                    modifier = Modifier
+                        .padding(10.dp)
+                ) {
+                    items(superheroList.size) { index ->
+                        val superhero = superheroList[index]
+                        Column {
+                            NetworkGifImage(superhero.urlGifImage) {
+                                navController.navigate(
+                                    route = "${AppRoutes.SUPERHERO_COMICS}/${superhero.name}"
+                                )
+                            }
+                            Text(
+                                text = superheroList[index].name,
+                                modifier = Modifier.padding(horizontal = 8.dp)
                             )
+                            Spacer(modifier = Modifier.height(10.dp))
                         }
-                        Text(
-                            text = superheroList[index].name,
-                            modifier = Modifier.padding(horizontal = 8.dp)
-                        )
-                        Spacer(modifier = Modifier.height(10.dp))
                     }
                 }
             }

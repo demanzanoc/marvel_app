@@ -17,15 +17,24 @@ class SuperheroComicsViewModel @Inject constructor(
 
     private val _comics = MutableLiveData<List<Comic>>()
     val comics: LiveData<List<Comic>> = _comics
+    private var superheroNameCached = ""
 
     fun getComics(superheroName: String) {
-        viewModelScope.launch {
-            try {
-                _comics.value = getComicsUseCase(superheroName)
-            } catch (exception: Exception) {
-                throw Exception(exception)
+        if (shouldGetComics(superheroName))
+            viewModelScope.launch {
+                try {
+                    _comics.value = getComicsUseCase(superheroName)
+                } catch (exception: Exception) {
+                    throw Exception(exception)
+                }
             }
-        }
+    }
+
+    private fun shouldGetComics(superheroName: String): Boolean {
+        return if (superheroName != superheroNameCached) {
+            superheroNameCached = superheroName
+            true
+        } else false
     }
 
 }

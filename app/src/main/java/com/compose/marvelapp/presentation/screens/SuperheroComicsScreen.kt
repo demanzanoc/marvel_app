@@ -61,7 +61,7 @@ fun SuperheroComicsScreen(
                 ) {
                     CircularProgressIndicator()
                     Spacer(modifier = Modifier.height(10.dp))
-                    Text(text = "Cargando información...")
+                    Text(text = "Loading...")
                 }
             } else {
                 LazyVerticalGrid(

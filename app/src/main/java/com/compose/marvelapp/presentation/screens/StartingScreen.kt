@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -26,7 +27,10 @@ import com.compose.marvelapp.presentation.theme.MarvelAppTheme
 @Composable
 fun StartingScreen(navController: NavHostController) {
     Surface(modifier = Modifier.background(color = MaterialTheme.colorScheme.background)) {
-        Box(Modifier.padding(20.dp).fillMaxSize()) {
+        Box(
+            Modifier
+                .padding(20.dp)
+                .fillMaxSize()) {
             Image(
                 painterResource(id = R.drawable.marvel_icon_image),
                 contentDescription = "marvel image",
@@ -36,12 +40,13 @@ fun StartingScreen(navController: NavHostController) {
                 onClick = { navController.navigate(AppRoutes.HOME) },
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
-                    .padding(bottom = 10.dp),
+                    .padding(bottom = 10.dp)
+                    .fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(
                     MaterialTheme.colorScheme.secondary
                 )
             ) {
-                Text(text = "Ingresar", Modifier.padding(8.dp), fontSize = 20.sp)
+                Text(text = "Start", Modifier.padding(vertical = 4.dp, horizontal = 16.dp), fontSize = 20.sp)
             }
         }
     }

@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -50,6 +52,13 @@ android {
 }
 
 dependencies {
+    val navVersion = "2.7.7"
+    val hiltVersion = "2.51"
+    val coilVersion = "2.6.0"
+    val retrofitVersion = "2.9.0"
+    val viewModelLifecycleVersion = "2.7.0"
+    val hiltNavVersion = "1.2.0"
+    val okHttpVersion = "4.12.0"
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
@@ -66,4 +75,30 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    //Livedata
+    implementation ("androidx.compose.runtime:runtime-livedata")
+
+    //Dagger Hilt
+    implementation("com.google.dagger:hilt-android:$hiltVersion")
+    kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
+    implementation ("androidx.hilt:hilt-navigation-compose:$hiltNavVersion")
+
+    //Retrofit
+    implementation ("com.squareup.retrofit2:retrofit:$retrofitVersion")
+    implementation ("com.squareup.retrofit2:converter-gson:$retrofitVersion")
+
+    // ViewModel
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:$viewModelLifecycleVersion")
+
+    //Navigation
+    implementation ("androidx.navigation:navigation-compose:$navVersion")
+
+    //Coil
+    implementation("io.coil-kt:coil-compose:$coilVersion")
+    implementation("io.coil-kt:coil-gif:$coilVersion")
+}
+
+kapt {
+    correctErrorTypes = true
 }

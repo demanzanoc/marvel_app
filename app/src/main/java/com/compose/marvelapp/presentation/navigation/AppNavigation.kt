@@ -7,11 +7,11 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.compose.marvelapp.presentation.screens.ComicDetailScreen
-import com.compose.marvelapp.presentation.screens.HomeScreen
-import com.compose.marvelapp.presentation.screens.StartingScreen
-import com.compose.marvelapp.presentation.screens.SuperheroComicsScreen
-import com.compose.marvelapp.presentation.viewmodels.SuperheroComicsViewModel
+import com.compose.marvelapp.presentation.screens.comics.ComicDetailScreen
+import com.compose.marvelapp.presentation.screens.comics.HomeScreen
+import com.compose.marvelapp.presentation.screens.comics.StartingScreen
+import com.compose.marvelapp.presentation.screens.comics.SuperheroComicsScreen
+import com.compose.marvelapp.presentation.viewmodels.comics.SuperheroComicsViewModel
 
 @Composable
 fun AppNavigator(navController: NavHostController) {

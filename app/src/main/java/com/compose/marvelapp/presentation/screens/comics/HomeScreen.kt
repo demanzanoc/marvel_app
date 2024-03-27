@@ -1,4 +1,4 @@
-package com.compose.marvelapp.presentation.screens
+package com.compose.marvelapp.presentation.screens.comics
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column

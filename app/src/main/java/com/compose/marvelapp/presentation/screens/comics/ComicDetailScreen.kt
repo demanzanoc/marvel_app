@@ -1,4 +1,4 @@
-package com.compose.marvelapp.presentation.screens
+package com.compose.marvelapp.presentation.screens.comics
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,7 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.compose.marvelapp.presentation.viewmodels.SuperheroComicsViewModel
+import com.compose.marvelapp.presentation.viewmodels.comics.SuperheroComicsViewModel
 
 @Composable
 fun ComicDetailScreen(
